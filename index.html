@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Housing Finder - College Station, TX</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🏠 Student Housing Finder</h1>
+            <p class="subtitle">College Station, TX - Texas A&amp;M University</p>
+        </header>
+        
+        <!-- Main Content -->
+        <main>
+            <!-- Sidebar with filters -->
+            <aside class="sidebar">
+                <div class="filter-section">
+                    <h2>🔍 Filter Options</h2>
+                    
+                    <!-- Budget Filter -->
+                    <div class="filter-group">
+                        <label for="budget-min">Budget ($/month)</label>
+                        <div class="budget-inputs">
+                            <input type="number" id="budget-min" placeholder="Min" min="0" step="50">
+                            <span>to</span>
+                            <input type="number" id="budget-max" placeholder="Max" min="0" step="50">
+                        </div>
+                    </div>
+                    
+                    <!-- Housing Type Filter -->
+                    <div class="filter-group">
+                        <label>Housing Type</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="type-apartment" checked> Apartment
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="type-house" checked> House
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="type-studio" checked> Studio
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="type-townhouse" checked> Townhouse
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Transportation Preference -->
+                    <div class="filter-group">
+                        <label for="transport-mode">Transportation Mode</label>
+                        <select id="transport-mode">
+                            <option value="all">All Modes</option>
+                            <option value="walking">Walking</option>
+                            <option value="biking">Biking</option>
+                            <option value="driving">Driving</option>
+                            <option value="bus">Bus/Transit</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Max Travel Time -->
+                    <div class="filter-group">
+                        <label for="max-travel-time">Max Travel Time (minutes)</label>
+                        <input type="range" id="max-travel-time" min="5" max="60" value="30">
+                        <span id="travel-time-value">30 min</span>
+                    </div>
+                    
+                    <!-- Bedrooms Filter -->
+                    <div class="filter-group">
+                        <label for="bedrooms">Bedrooms</label>
+                        <select id="bedrooms">
+                            <option value="any">Any</option>
+                            <option value="1">1 Bedroom</option>
+                            <option value="2">2 Bedrooms</option>
+                            <option value="3">3 Bedrooms</option>
+                            <option value="4">4+ Bedrooms</option>
+                        </select>
+                    </div>
+                    
+                    <button id="apply-filters" class="btn btn-primary">Apply Filters</button>
+                    <button id="reset-filters" class="btn btn-secondary">Reset Filters</button>
+                </div>
+                
+                <!-- Results Summary -->
+                <div class="results-summary">
+                    <h3>📊 Results</h3>
+                    <p><span id="results-count">0</span> properties found</p>
+                </div>
+            </aside>
+            
+            <!-- Map Container -->
+            <div class="map-container">
+                <div id="map"></div>
+                
+                <!-- Legend -->
+                <div class="map-legend">
+                    <h4>Legend</h4>
+                    <div class="legend-item">
+                        <span class="legend-marker marker-apartment"></span>
+                        <span>Apartment</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker marker-house"></span>
+                        <span>House</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker marker-studio"></span>
+                        <span>Studio</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker marker-townhouse"></span>
+                        <span>Townhouse</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker marker-university"></span>
+                        <span>Texas A&amp;M</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Property Details Panel -->
+        <div id="property-details" class="property-panel hidden">
+            <button id="close-panel" class="close-btn">&times;</button>
+            <div id="panel-content"></div>
+        </div>
+        
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 Student Housing Finder | GEOG 392 Project | Texas A&amp;M University</p>
+        </footer>
+    </div>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    
+    <!-- Housing Data -->
+    <script src="data/housing-data.js"></script>
+    
+    <!-- Main Application -->
+    <script src="js/app.js"></script>
+</body>
+</html>
