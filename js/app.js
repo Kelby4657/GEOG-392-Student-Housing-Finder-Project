@@ -103,6 +103,16 @@ function initFilters() {
     
     // Close property panel
     document.getElementById('close-panel').addEventListener('click', closePropertyPanel);
+    
+    // Event delegation for popup buttons (handles dynamically created buttons)
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('btn-details')) {
+            const propertyId = parseInt(e.target.getAttribute('data-property-id'), 10);
+            if (!isNaN(propertyId)) {
+                showPropertyDetails(propertyId);
+            }
+        }
+    });
 }
 
 /**
@@ -176,10 +186,11 @@ function filterHousingData(data) {
  */
 function addPropertyMarker(property) {
     const color = markerColors[property.type];
+    const priceLabel = Math.round(property.price / 100);
     
     const icon = L.divIcon({
         className: 'custom-div-icon',
-        html: `<div style="background-color: ${color}; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 11px; border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">$${Math.round(property.price/100)}</div>`,
+        html: `<div class="property-marker" style="background-color: ${color};">$${priceLabel}</div>`,
         iconSize: [30, 30],
         iconAnchor: [15, 15]
     });
@@ -235,7 +246,7 @@ function createPopupContent(property) {
                 ${property.sqft} sq ft
             </div>
             ${travelInfo}
-            <button class="btn-details" onclick="showPropertyDetails(${property.id})">View Details</button>
+            <button class="btn-details" data-property-id="${property.id}">View Details</button>
         </div>
     `;
 }

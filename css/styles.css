@@ -425,6 +425,21 @@ footer {
     font-size: 14px;
 }
 
+/* Property marker style for map icons */
+.property-marker {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
 /* ===== Responsive Design ===== */
 @media (max-width: 768px) {
     main {

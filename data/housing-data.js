@@ -432,8 +432,3 @@ const housingData = [
         }
     }
 ];
-
-// Export for use in main application
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { housingData, TAMU_LOCATION };
-}
